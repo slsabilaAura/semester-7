@@ -163,12 +163,10 @@ class KuliahController extends Controller
     // Method untuk membaca data perkuliahan
     public function indexPerkuliahan()
     {
-        $perkuliahan = Perkuliahan::all();
-        $mata_kuliah = MataKuliah::all();
-        $dosen = Dosen::all();
-        $mahasiswa = Mahasiswa::all();
-
-        return view('data.perkuliahan', compact('perkuliahan', 'mata_kuliah', 'dosen', 'mahasiswa'));
+        $perkuliahan = Perkuliahan::with(['mahasiswa', 'dosen', 'mataKuliah'])->get();
+    
+        return view('data.perkuliahan', compact('perkuliahan'));
     }
+    
 
 }
